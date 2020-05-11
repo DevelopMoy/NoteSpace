@@ -1,4 +1,4 @@
-# Project Title
+# NoteSpace
 A super-basic note editor made with Java using Swing library.
 
 ## Getting Started
