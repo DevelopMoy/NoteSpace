@@ -8,7 +8,7 @@ You can compile the source code using your prefered IDE
 ## Built With
 
 * Java SE 8
-*Swing Library
+* Swing Library
 
 
 ## Versioning
