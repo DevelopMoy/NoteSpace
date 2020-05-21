@@ -112,7 +112,7 @@ public class MainPanel extends JPanel {
                     JOptionPane.showMessageDialog(thisComp,"ERROR, FILE NOT FOUND "+e.getMessage());
                 }catch (IOException e){
                     JOptionPane.showMessageDialog(thisComp,"ERROR, INPUT / OUTPUT ERROR "+e.getMessage());
-                }
+                }regat
             }
         }
 
