@@ -10,14 +10,19 @@ import java.awt.event.ActionListener;
 import java.io.*;
 
 public class MainPanel extends JPanel {
+    private int fontSize =12;
+    private int fontType=Font.BOLD;
+    private Font currentFont=new Font("arial",fontType,fontSize);
     private Component thisComp =this;
     private JTextArea mainArea=new JTextArea();
     private JScrollPane scrollTextArea=new JScrollPane (mainArea);
     private ToolsBar mainToolsBar =new ToolsBar();
+    private EditTextPanel mainEditPanel =new EditTextPanel();
     private boolean saveState=false;
 
     public MainPanel (){
         mainArea.setLineWrap(true);
+        mainArea.setFont(new Font("Arial",Font.BOLD,fontSize));
         mainArea.getDocument().addDocumentListener(new DocumentList());
         layoutConfig();
     }
@@ -26,6 +31,27 @@ public class MainPanel extends JPanel {
         super.setLayout(new BorderLayout());
         add (mainToolsBar,BorderLayout.NORTH);
         add (scrollTextArea,BorderLayout.CENTER);
+        add (mainEditPanel,BorderLayout.SOUTH);
+    }
+
+    private class EditTextPanel extends JPanel {
+        private String [] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+        private JComboBox selectFont=new JComboBox(fonts);
+
+        public EditTextPanel (){
+            selectFont.addActionListener(new EditFontAction());
+            add(new JLabel("SELECT FONT: "));
+            add(selectFont);
+        }
+
+        private class EditFontAction implements ActionListener {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                currentFont=new Font((String)selectFont.getSelectedItem(),fontType,fontSize);
+                mainArea.setFont(currentFont);
+            }
+        }
+
     }
 
     private class DocumentList implements DocumentListener {
