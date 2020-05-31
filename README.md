@@ -13,9 +13,9 @@ Compile the source code using your prefered IDE
 ## Versioning
 v0.0.1 Initial Settings and basic components.
 
-v0.3.0 Added both save-open and edit tools-bar to the main interface.
-
 v0.2.0 Added save and open buttons.
+
+v0.3.0 Added both save-open and edit tools-bar to the main interface.
 
 v0.4.0 Added a main menu bar with main functions: new, open, save, save as.
 
