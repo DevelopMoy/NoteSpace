@@ -19,6 +19,8 @@ v0.3.0 Added both save-open and edit tools-bar to the main interface.
 
 v0.4.0 Added a main menu bar with main functions: new, open, save, save as.
 
+v0.4.1 Changed JTextArea component to a JTextPane
+
 ## Authors
 
 ** Moises Alvarez
