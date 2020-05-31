@@ -14,7 +14,7 @@ public class MainPanel extends JPanel {
     private int fontType=Font.BOLD;
     private Font currentFont=new Font("arial",fontType,fontSize);
     private Component thisComp =this;
-    private JTextArea mainArea=new JTextArea();
+    private JTextPane mainArea=new JTextPane();
     private JScrollPane scrollTextArea=new JScrollPane (mainArea);
     private EditTextPanel mainEditPanel =new EditTextPanel();
     private JMenuBar mainMenuBar=new JMenuBar();
@@ -28,7 +28,6 @@ public class MainPanel extends JPanel {
 
     public MainPanel (Component mainWindow){
         superWindow=mainWindow;
-        mainArea.setLineWrap(true);
         mainArea.setFont(new Font("Arial",Font.BOLD,fontSize));
         mainArea.getDocument().addDocumentListener(new DocumentList());
         layoutConfig();
@@ -256,6 +255,7 @@ public class MainPanel extends JPanel {
             if (returnVal==JFileChooser.APPROVE_OPTION){
                 mainArea.setText("");
                 String data;
+                StringBuilder dataFinal= new StringBuilder();
                 String path=choose.getCurrentDirectory()+"/"+choose.getSelectedFile().getName();
                 thisFileName=choose.getSelectedFile().getName();
                 thisFilePath=path;
@@ -267,9 +267,10 @@ public class MainPanel extends JPanel {
                     do{
                         data=buffReader.readLine();
                         if (data!=null){
-                            mainArea.append(data);
+                            dataFinal.append(data);
                         }
                     }while (data!=null);
+                    mainArea.setText(dataFinal.toString());
                 }catch (NullPointerException e){
                     System.out.println(e.getMessage());
                 }catch (FileNotFoundException e){
@@ -280,7 +281,5 @@ public class MainPanel extends JPanel {
             }
             updateTittle(thisFileName);
         }
-
     }
 }
-
