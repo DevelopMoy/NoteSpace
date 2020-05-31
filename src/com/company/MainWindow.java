@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
-    private MainPanel mPanel = new MainPanel();
+    private MainPanel mPanel = new MainPanel(this);
 
     public MainWindow (){
         super.setSize(1024,768);
@@ -15,7 +15,5 @@ public class MainWindow extends JFrame {
 
         super.setVisible(true);
     }
-
-
 
 }
