@@ -17,6 +17,8 @@ v0.0.1 Initial Settings and basic components.
 
 v0.2.0 Added save and open buttons.
 
+v0.4.0 Added a main menu bar with main functions: new, open, save, save as.
+
 ## Authors
 
 ** Moises Alvarez
