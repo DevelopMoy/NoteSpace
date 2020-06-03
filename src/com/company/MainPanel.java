@@ -1,12 +1,17 @@
 package com.company;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.DefaultEditorKit;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.*;
 
 public class MainPanel extends JPanel {
@@ -25,12 +30,20 @@ public class MainPanel extends JPanel {
     private ToolsBar mainToolsBar =new ToolsBar();
     private Component superWindow;
 
+    public boolean isSaveState() {
+        return saveState;
+    }
 
     public MainPanel (Component mainWindow){
         superWindow=mainWindow;
-        mainArea.setFont(new Font("Arial",Font.BOLD,fontSize));
+        mainArea.setFont(currentFont);
         mainArea.getDocument().addDocumentListener(new DocumentList());
         layoutConfig();
+    }
+
+    public void updateFont (){
+        currentFont=new Font(mainArea.getFont().getName(),mainArea.getFont().getStyle(),fontSize);
+        mainArea.setFont(currentFont);
     }
 
     private void layoutConfig (){
@@ -43,11 +56,22 @@ public class MainPanel extends JPanel {
     private class EditTextPanel extends JPanel {
         private String [] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         private JComboBox selectFont=new JComboBox(fonts);
+        private SpinnerNumberModel numerModel = new SpinnerNumberModel(12,4,72,4);
+        private JSpinner fontSizeSpinner = new JSpinner(numerModel);
 
         public EditTextPanel (){
             selectFont.addActionListener(new EditFontAction());
             add(new JLabel("SELECT FONT: "));
             add(selectFont);
+            add(new JLabel("SIZE: "));
+            add(fontSizeSpinner);
+            fontSizeSpinner.addChangeListener(new ChangeListener(){
+                @Override
+                public void stateChanged(ChangeEvent changeEvent) {
+                    fontSize=(Integer) fontSizeSpinner.getValue();
+                    updateFont();
+                }
+            });
         }
 
         private class EditFontAction implements ActionListener {
@@ -88,7 +112,8 @@ public class MainPanel extends JPanel {
         private JMenu editMenu=new JMenu("Edit");;
         private JMenu configMenu=new JMenu("Settings");
         private JMenuItem [] fileOptions = {new JMenuItem("New File"),new JMenuItem("Open"),new JMenuItem("Save"), new JMenuItem("Save as")};
-        private JMenuItem [] editOptions = {new JMenuItem("Clear Text Area")};
+        private JMenuItem [] editOptions = {new JMenuItem("Clear Text Area"),new JMenuItem("Copy"),new JMenuItem("Paste")};
+        private JMenuItem credits = new JMenuItem("About");
         ToolsBar (){
             mainMenuBar.add(fileMenu);
             mainMenuBar.add(editMenu);
@@ -99,6 +124,7 @@ public class MainPanel extends JPanel {
             for (JMenuItem e:editOptions){
                 editMenu.add(e);
             }
+            configMenu.add(credits);
             addActions ();
         }
 
@@ -108,6 +134,14 @@ public class MainPanel extends JPanel {
             fileOptions[2].addActionListener(new SaveAction());
             fileOptions[3].addActionListener(new SaveAsAction());
             editOptions[0].addActionListener(new ClearAllAction());
+            editOptions[1].addActionListener(new DefaultEditorKit.CopyAction());
+            editOptions[2].addActionListener(new DefaultEditorKit.PasteAction());
+            credits.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    JOptionPane.showMessageDialog(thisComp,"DEVELOPED BY: MOISES ALVAREZ USING JAVA AND SWING LIBRARY","About",JOptionPane.INFORMATION_MESSAGE);
+                }
+            });
         }
 
         private class CreateNewAction implements ActionListener {
