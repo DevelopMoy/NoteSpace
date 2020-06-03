@@ -153,7 +153,6 @@ public class MainPanel extends JPanel {
                 if ((!(mainArea.getText().compareTo("")==0))&&saveState==false){
                     op=JOptionPane.showConfirmDialog(thisComp,"DO YOU WANT TO SAVE CHANGES FOR THIS DOCUMENT?");
                     if (op==JOptionPane.YES_OPTION){
-                        System.out.println("yes");
                         if (wasSavedForFirstTime){
                             saveFunction();
                         }else {
@@ -161,11 +160,9 @@ public class MainPanel extends JPanel {
                         }
                     }else {
                         if (op==JOptionPane.NO_OPTION){
-                            System.out.println("NO");
                             mainArea.setText("");
                         }else {
                             if (op==JOptionPane.CANCEL_OPTION){
-                                System.out.println("CANCEL");
                                 enter=false;
                             }
                         }
@@ -221,7 +218,6 @@ public class MainPanel extends JPanel {
             try {
                 int returnValue = select.showSaveDialog(thisComp);
                 if (returnValue==JFileChooser.APPROVE_OPTION){
-                    System.out.println("YOU SELECTED: "+select.getCurrentDirectory().toString()+" FILE NAME: "+select.getSelectedFile().getName());
                     writteFile=new File(select.getCurrentDirectory()+"/"+select.getSelectedFile().getName());
                     thisFileName=select.getSelectedFile().getName();
                     thisFilePath=select.getCurrentDirectory()+"/"+select.getSelectedFile().getName();
