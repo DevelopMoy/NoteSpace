@@ -21,6 +21,8 @@ v0.4.0 Added a main menu bar with main functions: new, open, save, save as.
 
 v0.4.1 Changed JTextArea component to a JTextPane
 
+v0.6.0 Added option to change font size, modified main jframe closing events
+
 ## Authors
 
 ** Moises Alvarez
