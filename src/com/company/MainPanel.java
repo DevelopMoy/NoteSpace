@@ -15,7 +15,7 @@ import java.awt.event.WindowEvent;
 import java.io.*;
 
 public class MainPanel extends JPanel {
-    private int fontSize =12;
+    private int fontSize =16;
     private int fontType=Font.BOLD;
     private Font currentFont=new Font("arial",fontType,fontSize);
     private Component thisComp =this;
@@ -56,7 +56,7 @@ public class MainPanel extends JPanel {
     private class EditTextPanel extends JPanel {
         private String [] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
         private JComboBox selectFont=new JComboBox(fonts);
-        private SpinnerNumberModel numerModel = new SpinnerNumberModel(12,4,72,4);
+        private SpinnerNumberModel numerModel = new SpinnerNumberModel(fontSize,4,72,4);
         private JSpinner fontSizeSpinner = new JSpinner(numerModel);
 
         public EditTextPanel (){
