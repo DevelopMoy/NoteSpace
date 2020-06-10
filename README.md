@@ -1,5 +1,5 @@
 # NoteSpace
-A basic text editor made with Java using Swing library.
+A basic note editor made with Java using Swing library.
 
 ## Getting Started
 Compile the source code using your prefered IDE
